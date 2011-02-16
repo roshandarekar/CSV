@@ -1,10 +1,8 @@
     <form id="form" method="POST" action="#/">
         <fieldset class="green box" >
             <legend>This is a legend</legend>
+            <input type=hidden name=id value="<%= id  %>" />
             <ul class="form tar vvv thin">
-                <li>
-                    <h4>ID</h4><input name="id_<%=type%>" />
-                </li>
                 <li>
                     <h4>Name</h4><input name="name"/>
                 </li>

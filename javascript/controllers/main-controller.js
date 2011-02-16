@@ -1,4 +1,11 @@
 MainController = function(app) { with (app) {
+
+	bind('save-row', function(e, data) {
+       	
+       	alert("sidebar form submitted");
+    });
+		
+
         app.get('#/List',function(context)
             {
                 context .render('templates/List-View.template', [ { "details" : "list-details" } , { "details" : "shown data" }] )
@@ -19,40 +26,48 @@ MainController = function(app) { with (app) {
                             });
                         })
                         .then(function() {
-                            $("#MyTable").find("span.edit").click(function(){
-                                alert($(this).find('tr[name=1]').attr("id"));
-                                context .render('templates/Edit-Data.template',{'type':'old'})
-                                        .replace("#sidebar-content")
-                            })
+
+                            $("#MyTable").find("span.edit").click(function() {
+
+								
+								var id = $(this).attr("id").replace("row_",'');
+								
+								$.getJSON("/api/Book/" + id , function(json) {
+
+                                	context .render('templates/Edit-Data.template', json)
+                                        	.replace("#sidebar-content")
+											then( function(html) {
+
+												$('#Save_Row').click(function(){
+                     								
+                     								context.trigger("save-row");
+                     							})
+											})
+								});
+
+                            });
+
                         })
-                        .then(function() {
-                            context .render('templates/Menu.template')
-                                    .replace("#section-menu")
-                                    .then(function() {
-                                        $("#create").click(function(){
-                                            context .render('templates/Edit-Data.template',{'type':'new'})
-                                                    .replace("#sidebar-content")
-                                            //var k=$('#form').find('input[name=id]').val()
-                                            //context .render('templates/Edit.template',{"ID":"k","NAME":"$(this).find('input[name=name]').val()","ADMIN_ID":"$(this).find('input[name=admin]').val()","EXPIRY":"$(this).find('input[name=exp]').val()"})
-                                            //        .replace("#ADD")
-                                        })
-                                    })
-                                    .then('#Save_Row').click(function(){
-                                        alert("Clicked On Submit");
-                                        //context .render('templates/Edit.template',{"ID":"k","NAME":"$(this).find('input[name=name]').val()","ADMIN_ID":"$(this).find('input[name=admin]').val()","EXPIRY":"$(this).find('input[name=exp]').val()"})
-                                        //        .replace("#ADD")
-                                    })
-                        })
-                        /*.then(function() {
-                            $("#form").find("button[id='submit']").click(function(){
-                                console.log("In The Submit");
-                                var k=$('#form').find('input[name=id]').val()
-                                if($("#form").find("input[name=id]").attr('id')=="id_old")
-                                    alert($("#form").find("input[name=id]").attr('id').replace('id_'));
-                                    context .render('templates/Edit.template',{"ID":k,"NAME":"$(this).find('input[name=name]').val()","ADMIN_ID":"$(this).find('input[name=admin]').val()","EXPIRY":$(this).find('input[name=exp]').val()})
-                                            .replace("#ADD")
-                            })
-                        })*/
+
+               context .render('templates/Menu.template')
+               		.replace("#section-menu")
+                    .then(function() {
+                            $("#create").click(function() {
+
+                                context .render('templates/Edit-Data.template',{'id':'new'})
+                                		.replace("#sidebar-content")
+										.then( function(html) {
+
+											$('#Save_Row').click(function(){
+                     							
+                     							context.trigger("save-row");
+                     						})
+										})
+
+                             })
+                     })
+                     
+                    
         });
 //==============================IMPORT==========================================
         app.get('#/Import',function(context)
