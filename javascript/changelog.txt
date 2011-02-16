@@ -1,0 +1,136 @@
+April XX.
+
+
+Version 3.0.0 released. Changes:
+ - Rewrote the plugin as an jquery.ui plugin
+
+-----------------------
+
+April 4.
+
+
+Version 2.0.1 released. Changes:
+ - Fixed the destroy method
+
+-----------------------
+
+April 2.
+
+
+Version 2.0.0 released. Changes:
+ - No code changes has been done compared to 2.0.0-RC4 - just version changes.
+ - A zip file containing a few usage examples have been added to the zip
+
+-----------------------
+
+March 3, 2010
+
+Version 2.0.0-RC4 released. Changes:
+ - fixed issue with invalid data being returned in the afterBack callback when the history plugin is enabled.
+ - fixed so that the afterNext and afterBack trigger correctly when the history plugin is used
+ - added an option to show the back button on the first step. The option is named showBackOnFirstStep and defaults to false - thus hiding the backbutton on the first step.
+
+-----------------------
+
+February 11, 2010
+
+Version 2.0.0-RC3 released. Changes: 
+ - fixed "vertical jumping" of the page after wizard initialization and when navigating between steps. This occurred due to the browser url having a hash (#stepid) that equaled an element id in the page. The fix was to append a '_'-character before the step id when using the history plugin. This means of course that people using direct linking to a step need to revise their url:s by prepending the same '_'-character. One can also use the show method of the plugin to get to a specified step e.g. $('#idofelement').click(function(){$("#formid").formwizard("show","stepid");});
+
+-----------------------
+
+February 10, 2010
+
+Version 2.0.0-RC2 released. Changes: 
+ - fixed bug where radiobuttons did not work as links.
+ - fixed so that first input field of each step can be focused properly by setting focusFirstInput to true
+ - fixed smoother animation when transitioning between steps (only available when history plugin is disabled).
+ - added option for specifying outAnimation. (e.g. fadeOut, slideUp and hide, most visible when having the history plugin disabled)
+
+-----------------------
+
+February 4, 2010
+
+Version 2.0.0-RC released. Changes: The internal structure of the plugin has been restructured for easier maintainability and extension.
+
+ - Input fields need not be disabled in the HTML anymore, done by the plugin during initialization. If the form is big one can still disable the inputs in HTML and set the option <b>disableInputFields</b> to false in the wizard settings.
+ - The navigation of the plugin is now based on id:s of the steps, which in turn means that all elements that define a step <b>must have a unique id</b>.
+ - It is now possible to have the wizard focusing the first input field on each step during navigation. This can be enabled by setting the opiton <b>focusFirstInput</b> to true.
+ - One can now specify the transition animation between the steps. The option enabling this are <b>inAnimation</b>
+ - The animation of this version should be smoother and the navigation buttons are disabled during the transition.
+ - The submit steps are specified by adding a class <b>submit_step</b> to the <b>step element</b> instead of a hidden link on the step.
+ - A method <b>destroy</b> has been added to completely remove the wizard functionality from a form.
+ - A method <b>show</b> has been added to provide functionality to show any step in the wizard. (Should probably be used with care.)
+ - A method <b>state</b> has been added to provide a means to get the state of the wizard.
+ - The documentation has been updated to be more concise and hopefully the wizard will be easier to use as a result of that.
+ - The documentation is available at http://thecodemine/
+
+-----------------------
+
+November 30, 2009
+Version 1.0.1 released. Changes: Fixed so that the validation plugin handles all validation using form.valid(). Fixed so that it is possible set focus to a field in the form after the wizard is rendered.
+
+-----------------------
+
+November 25, 2009
+
+Version 1.0.0 released. Changes: Fixed textarea validation
+
+-----------------------
+
+September 30, 2009
+
+Version 0.9.9 released. Changes: Added a wizard setting for by-passing redefinition of $.fn.formwizard (redefinition is done to handle reset functionality). To skip the redefinition, set callable : false when initializing the wizard. Note: reset functionality will not be available when setting callable to false
+
+-----------------------
+
+September 23, 2009
+
+Version 0.9.8 released. Changes: Reworked the server side validation. See change log for details.
+-----------------------
+
+August 26, 2009
+Version 0.9.7 released. Changes: Added a way to reset the wizard by calling $('#theform').formwizard('reset');. Also, some information about the wizard is now returned to the afterNext and afterBack callbacks (current step, previous step, if the current step is a submit step and finally an Array containing the activated steps)
+
+-----------------------
+
+July 23, 2009
+
+Version 0.9.6 released. Changes: Fix for enabling select validation.
+
+-----------------------
+
+July 17, 2009", 
+
+Version 0.9.5 released. Changes: Fix for enabling optional validation.
+
+-----------------------
+
+July 12, 2009
+
+Version 0.9.4 released. Changes: Performance fixes done for rendering and validation. Input fields need to be disabled in the HTML (no longer done by the plugin due to the performance hit that occurs when there are a lot of input elements in the form).
+
+-----------------------
+
+July 6, 2009
+
+Version 0.9.3 released. Changes: Bug fix for enabling back button when history plugin is not used
+
+-----------------------
+
+May 15, 2009
+
+Version 0.9.2 released. Changes: Bug fix for enabling radio buttons as links. Added initial functionality for doing server-side validation.
+
+-----------------------
+
+May 14, 2009
+
+Version 0.9.1 released. Changes: callbacks afterNext and afterBack have been added to provide a means to do stuff after the next and back buttons have been clicked. Specify these in the settings for the wizard plugin
+
+-----------------------
+
+April 8, 2009
+First version (0.9.0) of the form wizard plugin is out!
+
+-----------------------

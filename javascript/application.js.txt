@@ -1,0 +1,36 @@
+
+             function getCookie(NameOfCookie)
+             {
+                if (document.cookie.length > 0)
+               {              
+                 begin = document.cookie.indexOf(NameOfCookie+"=");       
+                  if (begin != -1) 
+                  {           
+                     begin += NameOfCookie.length+1;       
+                     end = document.cookie.indexOf(";", begin);
+                     if (end == -1) end = document.cookie.length;
+                     return unescape(document.cookie.substring(begin, end));
+                  } 
+              }
+               return null;
+            }
+            
+            function setCookie(NameOfCookie, value, expiredays)
+           {
+              var ExpireDate = new Date();
+              ExpireDate.setTime(ExpireDate.getTime() + (expiredays * 24 * 3600 * 1000));
+ 
+              document.cookie = NameOfCookie + "=" + escape(value) + ((expiredays == null) ? "" : "; expires=" + ExpireDate.toGMTString());
+           }
+
+           function DoTheCookieStuff()
+{
+Preference=getCookie('Preference');
+if (Preference!=null) 
+     {alert('Hi - your prefered searchengine is '+Preference)}
+// Since this is a samplepage you are not taken to the prefered page.
+// If the script should actually take the user to the preferred page you should replace the above line
+// with a line like this:      {window.location="http://"+Preference}
+else {alert('Hi - I do not know which searcengine you prefer.');}
+}
+ 

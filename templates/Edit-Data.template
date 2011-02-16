@@ -1,0 +1,27 @@
+    <form id="form" method="POST" action="#/">
+        <fieldset class="green box" >
+            <legend>This is a legend</legend>
+            <ul class="form tar vvv thin">
+                <li>
+                    <h4>ID</h4><input name="id_<%=type%>" />
+                </li>
+                <li>
+                    <h4>Name</h4><input name="name"/>
+                </li>
+                <li>
+                    <h4>admin_id</h4><input name="admin"/>
+                </li>
+                <li>
+                    <h4>expiry</h4><input  name="exp"/>
+                </li>
+                
+
+                
+                <li class="tar">
+                    <label></label>
+                    <input type="button" class="button tar" id="Save_Row" value="submit"/>
+                    <input type="reset" class="button tar" value="reset"/>
+                </li>
+            </ul>
+        </fieldset>
+    </form>

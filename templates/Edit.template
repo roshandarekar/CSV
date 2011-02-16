@@ -1,0 +1,16 @@
+
+		<td class="blue"></td>
+
+		<td class="blue">NAME</td>
+
+		<td class="blue">ADMIN_ID</td>
+
+                <td class="blue"></td>
+
+                
+		<td class="yellow action">
+			<span class="edit" id="edit2"></span>
+			<span class="delete"></span>
+			<input type="checkbox" name="select_1" class="chcktb1"/>
+		</td>
+
