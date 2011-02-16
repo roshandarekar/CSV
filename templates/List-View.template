@@ -1,13 +1,13 @@
-<table class="basetable tablesorter grid_17" id="MyTable"  >
-<thead>
+<table class="basetable tablesorter" id="MyTable"  >
+    <thead>
         <tr>
 		<th>ID</th>
 		
 		<th>Name</th>
 		
-		<th>admin_id</th>
+		<th>Admin_Id</th>
 
-                <th>expiry</th>
+                <th>Expiry</th>
 
                 <!--<th>schema_class</th>
 
@@ -17,64 +17,15 @@
 
                 <th>revision</th>-->
 
-                <td><input type="checkbox"  id="chckhead" name="CheckAll"/></td>
+                <td><input type="checkbox"  id="chckhead" class="CheckAll"/></td>
 		
 	</tr>
 
-</thead>
+    </thead>
 
-<tbody>
-	<tr id="td1" name="1">
-		<td class="blue">1</td>
-		
-		<td class="blue">eInvoices_CSIndustries</td>
-		
-		<td class="blue">1</td>
-
-                <td class="blue">1/4/2012</td>
-
-                <!--<td class="blue">eInvoices</td>
-
-                <td class="blue">eInvoices_CSIndustries_140220</td>
-
-                <td class="blue">dancer_eInvoices_CS</td>
-
-                <td class="blue">1.1</td>-->
-		
-		<td class="yellow action">
-			<span class="edit" id="edit1"></span>
-			<span class="delete"></span>
-			<input type="checkbox" name="select_1" class="chcktb1"/>
-		</td>
-	</tr>	
-	<tr id="td2" name="2">
-		<td class="blue">2</td>
-
-		<td class="blue">ePortfolio_Rokadia</td>
-
-		<td class="blue">4</td>
-
-                <td class="blue">10/1/2013</td>
-
-                <!--<td class="blue">ePortfolio</td>
-
-                <td class="blue">ePortfolio_Rokadia_02102009</td>
-
-                <td class="blue">dancer_ePortfolio_Ro</td>
-
-                <td class="blue">2.1</td>-->
-
-		<td class="yellow action">
-			<span class="edit" id="edit2"></span>
-			<span class="delete"></span>
-			<input type="checkbox" name="select_1" class="chcktb1"/>
-		</td>
-
-	</tr>
-<tr id="ADD">
-</tr>
+    <tbody id="ADD">
 	
-</tbody>
-	</table>
+    </tbody>
+</table>
 
 

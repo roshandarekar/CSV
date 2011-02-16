@@ -1,0 +1,16 @@
+
+<tr>
+		<td class="blue"><%= data.ID %></td>
+
+		<td class="blue"><%= data.Name %></td>
+
+		<td class="blue"><%= data.Admin_Id %></td>
+
+                <td class="blue"><%= data.Expiry %></td>
+                
+		<td class="yellow action">
+			<span class="edit" id="row_<%=data.ID%>" ></span>
+			<span class="delete" id="row_<%=data.ID%>"></span>
+			<input type="checkbox" name="select_1" class="chcktb1"/>
+		</td>
+</tr>

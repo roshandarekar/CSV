@@ -1,41 +1,20 @@
-    <form id="form" method="POST" action="#/">
+<form id="form" method="POST" action="#/">
         <fieldset class="green box" >
             <legend>This is a legend</legend>
-            <% if ( data[0].ID) { %>
-            <input type=hidden name=id value="<%= data[id-1].ID  %>" />
+            <% if ( data[0]!=" ") { %>
+            <input type=hidden name=id value="<%= data[0].ID  %>" />
             <ul class="form tar vvv thin">
                 <li>
-                    <h4>ID</h4><input value="<%=data[id-1].ID%>" name="ID"/>
+                    <h4>ID</h4><input value="<%=data[0].ID%>"/>
                 </li>
                 <li>
-                    <h4>Name</h4><input value="<%=data[id-1].Name%>" name="Name"/>
+                    <h4>Name</h4><input value="<%=data[0].Name%>"/>
                 </li>
                 <li>
-                    <h4>Admin_Id</h4><input value="<%=data[id-1].Admin_Id%>" name="Admin_Id"/>
+                    <h4>Admin_Id</h4><input value="<%=data[0].Admin_Id%>"/>
                 </li>
                 <li>
-                    <h4>Expiry</h4><input value="<%=data[id-1].Expiry%>" name="Expiry"/>
-                </li>
-                <li class="tar">
-                    <label></label>
-                    <input type="button" class="button tar" id="Save_Row" value="submit"/>
-                </li>
-            </ul>
-        <%}%>
-        <% if  ( data == 'new') { %>
-            <input type=hidden name=id value="<%= data  %>" />
-            <ul class="form tar vvv thin">
-                <li>
-                    <h4>ID</h4><input name="ID"/>
-                </li>
-                <li>
-                    <h4>Name</h4><input name="Name"/>
-                </li>
-                <li>
-                    <h4>Admin_Id</h4><input name="Admin_Id"/>
-                </li>
-                <li>
-                    <h4>Expiry</h4><input name="Expiry"/>
+                    <h4>Expiry</h4><input value="<%=data[0].Expiry%>"/>
                 </li>
                 <li class="tar">
                     <label></label>
@@ -43,6 +22,28 @@
                     <input type="reset" class="button tar" value="reset"/>
                 </li>
             </ul>
-        <%}%>
+            <% } %>
+            <% else { %>
+            <input type=hidden name=id value="new" />
+            <ul class="form tar vvv thin">
+                <li>
+                    <h4>ID</h4><input/>
+                </li>
+                <li>
+                    <h4>Name</h4><input/>
+                </li>
+                <li>
+                    <h4>Admin_Id</h4><input/>
+                </li>
+                <li>
+                    <h4>Expiry</h4><input/>
+                </li>
+                <li class="tar">
+                    <label></label>
+                    <input type="button" class="button tar" id="Save_Row" value="submit"/>
+                    <input type="reset" class="button tar" value="reset"/>
+                </li>
+            </ul>
+            <% } %>
         </fieldset>
     </form>
