@@ -1,6 +1,15 @@
 MainController = function(app) { with (app) {
-var id,name,Admin_Id,Expiry;
-        bind('save-row', function(e, data) {
+                var id,name,Admin_Id,Expiry;
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$BEFORE APP$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            app.before(/^#\/List/, function(context) {
+                context.log("inisde table");
+        	context.render('templates/Menu.template').replace("#section-menu");
+                context.render('templates/Pager.template').replace("#sidebar-content");
+                $("table").trigger("update");
+            })
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$BEFORE APP$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$USE BIND$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            bind('save-row', function(e, data) {
             alert("sidebar form submitted");
             id=$('#form').find("input[name=ID]").val()
             alert(id);
@@ -10,137 +19,126 @@ var id,name,Admin_Id,Expiry;
             alert(Admin_Id);
             Expiry=$('#form').find("input[name=Expiry]").val()
             alert(Expiry)
-            
-        });
-        bind('edit-n-hover',function(e,data){
 
-            
-                    $('.basetable').tableHover();
-                    $("#MyTable").tablesorter();
-                    $("#MyTable").find("span.edit").click(function() {
+        });
+//------------------------------------------------------------------------------
+            bind('Process',function(){
+                var context=this
+//=======================================TO EDIT DATA===========================
+                    $("#MyTable").find("span.edit").click(function(ev) {
                         var id = $(this).attr("id").replace("row_",'');
                         alert(id);
                         $.getJSON("api/Table.json",function(json){
-                            context.render('templates/Edit-Data.template',{"id":id,"data": json})
-                                    .replace("#sidebar-content")
+                            context .render('templates/Edit-Data.template',{"id":id,"data":json})
+                                    .replace("#EDIT")
                                     .then( function(html) {
                                         $('#Save_Row').click(function(){
                                             context.trigger("save-row");
                                         })
                                     })
-                         })
-                    })
+                        })
+                    });
+//======================================TO DELETE ROW===========================
                     $("#MyTable").find("span.delete").click(function() {
+                        $(this).unbind("click");
+                        $(this).siblings().unbind("click");
+                        $(this).parent("td").siblings().css("text-decoration", "line-through");
+                    });
+//=====================================TO SELECT ALL CHECKBOX===================
+                    $('#chckhead').click(function() {
+                        if (this.checked==false) {
+                            $('.chcktb1').attr('checked','')
+                        }
+                        else{
+                            $('.chcktb1').attr('checked','true')
+                        }
+                        return true;
+                    });
+//========================================TO EXPAND=============================
+                    $("#MyTable").find("a.expand").click(function() {
                         var id = $(this).attr("id").replace("row_",'');
                         alert(id);
-                        var k=$('#form').find("input[type=hidden]").val()
-                        alert(k);
-                        $(this).parent("td").parent("tr").remove();
-                        $("#MyTable").trigger("update");
-                    })
-           
-        })
-        /*bind('new-row', function(e, data) {
-            alert("new row inserted");
-            context.render('templates/New_Row.template')
-                    .appendTo("#ADD")
-
-        });*/
-
-        app.get('#/List',function(context)  {
-            context .render('templates/List-View.template')
-                    .replace("#main-content")
-                    .then (function(){
-                        this.load("api/Table.json")
-                            .then(function(json){
-                                context.render('templates/Edit.template',{"data":json})
-                                       .replace("#ADD")
-                                       .then(function(){
-                                           context.trigger("edit-n-hover");
-                                       })
-                            })
-                    })
-                    .then(function() {
-                        $('#chckhead').click(function() {
-                            if (this.checked==false) {
-                                $('.chcktb1').attr('checked','')
-                            }
-                            else{
-                                $('.chcktb1').attr('checked','true')
-                            }
-                            return true;
-                        });
-                    })
-        context .render('templates/Menu.template')
-        	.replace("#section-menu")
-                .then(function() {
-                    $("#create").click(function() {
-                        context .render('templates/Edit-Data.template',{'data':'new'})
-                                .replace("#sidebar-content")
-                                .then( function(html) {
-                                    $('#Save_Row').click(function(){
-                                        context .trigger("save-row");
-                                        context .render('templates/New_Row.template',{"data":{"ID":id,"Name":name,"Admin_Id":Admin_Id,"Expiry":Expiry}})
-                                                .appendTo("#ADD")
-                                                .then(function(){
-                                                    context .trigger("edit-n-hover");
-                                                })
+                        $.getJSON("api/Table.json",function(json){
+                            context .load('templates/Edit-Data.template',{"id":id,"data":json})
+                                    .then(function(content){
+                                        $.facebox( content );
                                     })
-                                })
-                    })
-                })
-                .then(function() {
-                    $("#delete").click(function() {
-                        alert("Delete All");
-                        if($('#chckhead').checked=="true")
-                            {
-                                alert('Selected All');
-                                $("#ADD").remove();
-                            }
-                        else
-                            {
-                                alert("Invalid ")
-                            }
-                    })
-                })
-        });
-//==============================IMPORT==========================================
-        app.get('#/Import',function(context)
-        {
-                context.render('templates/List-View.template')
-                       .appendTo('#main-content')
-                       .then(function() {
-                       		$('.basetable').tableHover();
                         })
+                    });
+})
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$USE BIND$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$GET APP$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+            app.get('#/List',function(context)  {
+                context .render('templates/List-View.template')
+                        .replace("#main-content")
                         .then (function(){
-                         $('.basetable').tableHover();
-                         $("#MyTable").tablesorter();
-                     })
-                     .then(function() {
-                         $('#chckhead').click(function() {
-                             if (this.checked==false) {
-                                 $('.chcktb1').attr('checked','')
-                             }else{
-                                 context.log("Yahoo1");
-                                $('.chcktb1').attr('checked','true')
-                             }
-                             return true;
-                         });
-                     })
-                       .then(function() {
-                            context.load('templates/Edit-Data.template')
-                                   .then(function( content) {
-                                         $.facebox( content );
-                                   });
-                       })
-            context.load('templates/Edit-Data.template')
-                   .then(function( content) {
-			$.facebox( content );
-                   });
-        });
-//=================================EXPORT=======================================
-        app.get('#/Export',function(context)
-        {
-              context.redirect("#Export");
-        });
+//===============================TO LOAD ROWS USING JSON========================
+                            $.getJSON("api/Table.json",function(json){
+                                context .render('templates/Edit.template',{"data":json})
+                                        .replace("#ADD")
+                                        .then(function(){
+                                            context.trigger("Process");
+                                        })
+//======================================TO INSERT NEW ROW=======================
+                                        .then(function(){
+                                            $("#create").click(function() {
+                                                context .render('templates/Edit-Data.template',{'data':'new'})
+                                                        .replace("#EDIT")
+                                                        .then( function(html) {
+                                                            $('#Save_Row').click(function(){
+                                                                context .trigger("save-row");
+                                                                context .render('templates/Edit-Data.template',{"data":{"ID":"id","Name":"name","Admin_Id":"Admin_Id","Expiry":"Expiry"}})
+                                                                        .appendTo("#ADD")
+                                                                        .then(function(){
+                                                                            context .trigger("Process")
+                                                                        })
+                                                                })
+                                                        })
+                                            });
+//=======================================TO DELETE ALL/SELECTED ROWS============
+                                            $("#delete").click(function() {
+                                                var checkboxes = $("#MyTable > tbody").find(":checked");
+                                                    if ($("#chckhead").attr("checked")) {
+                                                        alert('Selected All');
+                                                        $("#ADD").remove();
+                                                    }
+                                                    else {
+                                                        $.each(checkboxes, function(n, box){
+                                                        // box is individual checkbox
+                                                            var id = $(box).parent("td").siblings("td:first").text();
+                                                            $("#row_"+id).unbind("click");
+                                                            $("#row_"+id).siblings().unbind("click");
+                                                            $("#row_"+id).parent("td").siblings().css("text-decoration", "line-through");
+                                                        })
+                                                    }
+                                            });
+//====================================FOR IMPORT LIVE BOX=======================
+                                            $("#Import").click(function(){
+                                                context .load('templates/Import-View.template')
+                                                        .then(function( content) {
+                                                            $.facebox( content );
+                                                         });
+                                            });
+//====================================FOR EXPORT LIVE BOX=======================
+                                            $("#Export").click(function(){
+                                                context .load("templates/Export-View.template")
+                                                        .then(function(content){
+                                                            $.facebox(content);
+                                                        });
+                                                });
+//====================================FOR SEARCH LIVE BOX=======================
+                                            $("#Search1").click(function(){
+                                                context .load("templates/Search.template")
+                                                        .then(function(content){
+                                                            $.facebox(content);
+                                                        });
+                                            });
+//=======================================FOR TABLESORTER/TABLEPAGER=============
+                                            $("#MyTable").tablesorter()
+                                                         .tablesorterPager({ container : $("#pager") , positionFixed: false})
+                                        })
+                            })
+                        })
+            });
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$GET APP$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 }}

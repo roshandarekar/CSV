@@ -1,0 +1,15 @@
+<form action="#/form-post" method="POST" class="" >
+           <fieldset class="grid_15 yellow box  ">
+			   <legend>This is a legend</legend>
+			   <ul class="form big tar fat">
+				   <li class="required">
+						<label>Select a File</label>
+						<input type="file"  name="File-Save" size=55/>
+                                   </li>
+                                   <li class="tar"><label></label>
+                                       <input type="submit" value="Submit" class="button tar"/>
+                                       <input type="reset" value="Reset" class="button tar" />
+                                  </li>
+			   </ul>
+	   </fieldset>
+</form>

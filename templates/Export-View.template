@@ -1,0 +1,26 @@
+
+<form action="#/form-post" method="POST" class="">
+           <fieldset class="grid_15 yellow box  ">
+                <legend>This is a legend</legend>
+			   <ul class="form big tar fat">
+				   <li class="required">
+						<label>Select a File</label>
+						<input type="file"  name="File-Save" size=55/>
+                                   </li>
+                                   <li class="required">
+                                                <label>Save as Type</label>
+                                                <SELECT NAME="My-List">
+                                                     <option>choose formate of file
+                                                     <OPTION VALUE="m1">text Document (".txt")
+                                                     <OPTION VALUE="m2">word Document (".doc")
+                                                     <OPTION VALUE="m3">excel Document (".xls")
+                                                </SELECT>
+                                   </li>
+				   <li class="tar"><label></label>
+                                       <input type="submit" value="OK" class="button tar"/>
+                                       <input type="button" onclick="self.close()" value="Cancel" class="button tar" />
+                                  </li>
+			   </ul>
+	   </fieldset>
+</form>
+      

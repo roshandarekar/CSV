@@ -9,9 +9,10 @@
                 <td class="blue"><%=data[i].Expiry%></td>
                 
 		<td class="yellow action">
-			<span class="edit" id="row_<%=data[i].ID%>"></span>
-			<span class="delete" ></span>
-			<input type="checkbox" name="select_1" class="chcktb1"/>
+                    <span class="edit" id="row_<%=data[i].ID%>"></span>
+			<span class="delete" id="row_<%=data[i].ID%>"></span>
+			<input type="checkbox" name="select_1" id="row_<%=data[i].ID%>" class="chcktb1"/>
+			<br><a id="row_<%=data[i].ID%>" class="expand"><u>Expand</u></a>
 		</td>
 </tr>
-<% } %>
+<% } %> 

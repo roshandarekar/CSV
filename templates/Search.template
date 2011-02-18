@@ -1,0 +1,14 @@
+<form action="#/form-post" method="POST" class="" >
+           <fieldset class="grid_15 yellow box  ">
+                <legend>This is a legend</legend>
+			   <ul class="form big tar fat">
+				   <li class="required">
+                                                <label>Search</label>
+                                                <input type="textbox" value="insert your query !!" id="textbox1">
+                                   </li>
+				   <li class="tar"><label></label>
+                                       <input type="button" value="Find" id="find" class="button tar" />
+                                  </li>
+			   </ul>
+	   </fieldset>
+</form>
